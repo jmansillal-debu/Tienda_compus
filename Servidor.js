@@ -2,10 +2,10 @@ const express = require('express');
 const path = require('path');
 
 class Servidor {
-  constructor(clienteControlador) {
+  constructor(tiendaControlador) {
     this.app = express();
     this.puerto = process.env.PORT || 3000;
-    this.clienteControlador = clienteControlador;
+    this.tiendaControlador = tiendaControlador;
 
     this.configurarMiddlewares();
     this.configurarRutas();
@@ -17,7 +17,8 @@ class Servidor {
   }
 
   configurarRutas() {
-    this.app.post('/api/registrar', (req, res) => this.clienteControlador.registrar(req, res));
+    this.app.get('/api/productos', (req, res) => this.tiendaControlador.listarProductos(req, res));
+    this.app.post('/api/comprar', (req, res) => this.tiendaControlador.procesarCompra(req, res));
   }
 
   iniciar() {
