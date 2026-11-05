@@ -1,0 +1,104 @@
+* { box-sizing: border-box; }
+body { font-family: Arial, Helvetica, sans-serif; background: #0f172a; color: #f8fafc; margin: 0; min-height: 100vh; }
+.oculto { display: none !important; }
+button { font-family: inherit; }
+
+/* ---------- Login / Registro ---------- */
+.vista-auth { display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 1rem; }
+.tarjeta { background: #1e293b; padding: 2rem; border-radius: 10px; box-shadow: 0 4px 14px rgba(0,0,0,.4); width: 100%; max-width: 380px; }
+.tarjeta h2 { text-align: center; color: #38bdf8; margin: 0; }
+.subtitulo { text-align: center; color: #94a3b8; font-size: .9rem; margin: .3rem 0 1.2rem; }
+.pestanas { display: flex; gap: .4rem; margin-bottom: 1.2rem; background: #0f172a; padding: .3rem; border-radius: 8px; }
+.pestanas button { flex: 1; padding: .55rem; border: none; border-radius: 6px; background: transparent; color: #94a3b8; cursor: pointer; font-weight: bold; }
+.pestanas button.activa { background: #0ea5e9; color: #fff; }
+.campo { margin-bottom: 1rem; }
+label { display: block; margin-bottom: .4rem; font-weight: bold; font-size: .9rem; }
+input, select { width: 100%; padding: .6rem; border: 1px solid #475569; background: #0f172a; color: #fff; border-radius: 6px; font-size: .95rem; }
+input:focus, select:focus { outline: 2px solid #0ea5e9; border-color: transparent; }
+.btn-primario { width: 100%; padding: .75rem; background: #0ea5e9; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 1rem; font-weight: bold; }
+.btn-primario:hover { background: #0284c7; }
+.btn-primario:disabled { background: #475569; cursor: not-allowed; }
+#mensaje { margin-top: 1rem; text-align: center; font-size: .9rem; min-height: 1.2em; }
+
+/* ---------- Barra superior ---------- */
+.barra { position: sticky; top: 0; z-index: 20; background: #1e293b; border-bottom: 1px solid #334155; }
+.barra-contenido { max-width: 1200px; margin: 0 auto; padding: .8rem 1rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.logo { font-size: 1.3rem; font-weight: bold; color: #38bdf8; }
+.buscador { flex: 1; min-width: 180px; max-width: 420px; }
+.acciones { display: flex; align-items: center; gap: .5rem; margin-left: auto; flex-wrap: wrap; }
+.saludo { color: #94a3b8; font-size: .9rem; margin-right: .3rem; }
+.btn-secundario { background: #334155; color: #fff; border: none; padding: .5rem .8rem; border-radius: 6px; cursor: pointer; font-size: .9rem; }
+.btn-secundario:hover { background: #475569; }
+.btn-salir { background: transparent; color: #f87171; border: 1px solid #f87171; padding: .45rem .8rem; border-radius: 6px; cursor: pointer; font-size: .9rem; }
+.btn-salir:hover { background: #f87171; color: #0f172a; }
+.contador { background: #0ea5e9; border-radius: 999px; padding: .1rem .5rem; font-size: .8rem; margin-left: .2rem; }
+
+/* ---------- Hero / filtros ---------- */
+.hero { text-align: center; padding: 2.2rem 1rem 1rem; background: linear-gradient(180deg, #1e3a5f 0%, #0f172a 100%); }
+.hero h1 { margin: 0 0 .4rem; font-size: 2rem; }
+.hero p { margin: 0; color: #94a3b8; }
+.filtros { max-width: 1200px; margin: 0 auto; padding: 1rem; display: flex; gap: 1rem; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+.filtros select { width: auto; min-width: 200px; }
+.chips { display: flex; gap: .5rem; flex-wrap: wrap; }
+.chip { background: #1e293b; color: #cbd5e1; border: 1px solid #334155; padding: .4rem .9rem; border-radius: 999px; cursor: pointer; font-size: .85rem; }
+.chip:hover { border-color: #38bdf8; }
+.chip.activa { background: #0ea5e9; border-color: #0ea5e9; color: #fff; font-weight: bold; }
+
+/* ---------- Catálogo ---------- */
+.contenedor { max-width: 1200px; margin: 0 auto; padding: 0 1rem 2rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.2rem; }
+.producto { background: #1e293b; border: 1px solid #334155; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: transform .15s, border-color .15s; }
+.producto:hover { transform: translateY(-3px); border-color: #38bdf8; }
+.producto-imagen { height: 140px; display: flex; align-items: center; justify-content: center; font-size: 4rem; background: linear-gradient(135deg, #1e3a5f, #312e81); position: relative; }
+.etiqueta { position: absolute; top: .6rem; left: .6rem; background: #f59e0b; color: #0f172a; font-size: .7rem; font-weight: bold; padding: .15rem .5rem; border-radius: 999px; }
+.producto-cuerpo { padding: 1rem; display: flex; flex-direction: column; gap: .4rem; flex: 1; }
+.producto-categoria { color: #38bdf8; font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; }
+.producto-nombre { margin: 0; font-size: 1rem; }
+.producto-desc { color: #94a3b8; font-size: .85rem; margin: 0; flex: 1; }
+.producto-precio { font-size: 1.3rem; font-weight: bold; color: #4ade80; }
+.stock { font-size: .8rem; color: #94a3b8; }
+.stock.poco { color: #fbbf24; }
+.stock.agotado { color: #f87171; }
+.producto .btn-primario { margin-top: .4rem; padding: .6rem; font-size: .9rem; }
+.vacio { text-align: center; color: #94a3b8; padding: 3rem 0; }
+.pie { text-align: center; color: #64748b; padding: 1.5rem; border-top: 1px solid #1e293b; font-size: .85rem; }
+
+/* ---------- Paneles laterales ---------- */
+.fondo { position: fixed; inset: 0; background: rgba(0,0,0,.6); opacity: 0; pointer-events: none; transition: opacity .2s; z-index: 30; }
+.fondo.visible { opacity: 1; pointer-events: auto; }
+.panel { position: fixed; top: 0; right: 0; height: 100%; width: 100%; max-width: 400px; background: #1e293b; z-index: 40; display: flex; flex-direction: column; transform: translateX(100%); transition: transform .25s; box-shadow: -4px 0 20px rgba(0,0,0,.5); }
+.panel.abierto { transform: translateX(0); }
+.panel-cabecera { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.2rem; border-bottom: 1px solid #334155; }
+.panel-cabecera h3 { margin: 0; }
+.cerrar { background: none; border: none; color: #94a3b8; font-size: 1.3rem; cursor: pointer; }
+.cerrar:hover { color: #fff; }
+.panel-cuerpo { flex: 1; overflow-y: auto; padding: 1rem 1.2rem; }
+.panel-pie { padding: 1rem 1.2rem; border-top: 1px solid #334155; }
+.total { display: flex; justify-content: space-between; font-size: 1.1rem; margin-bottom: .8rem; }
+.total strong { color: #4ade80; }
+.btn-enlace { display: block; width: 100%; background: none; border: none; color: #94a3b8; margin-top: .6rem; cursor: pointer; font-size: .85rem; text-decoration: underline; }
+.item-carrito { display: flex; gap: .8rem; align-items: center; padding: .8rem 0; border-bottom: 1px solid #334155; }
+.item-emoji { font-size: 2rem; }
+.item-info { flex: 1; min-width: 0; }
+.item-nombre { font-size: .9rem; font-weight: bold; margin: 0 0 .2rem; }
+.item-precio { color: #4ade80; font-size: .85rem; }
+.cantidad { display: flex; align-items: center; gap: .4rem; margin-top: .4rem; }
+.cantidad button { width: 26px; height: 26px; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: #fff; cursor: pointer; }
+.cantidad button:hover { background: #334155; }
+.quitar { background: none; border: none; color: #f87171; cursor: pointer; font-size: 1.1rem; }
+.pedido { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: .8rem; margin-bottom: .8rem; }
+.pedido-cabecera { display: flex; justify-content: space-between; font-weight: bold; margin-bottom: .4rem; }
+.pedido-fecha { color: #94a3b8; font-size: .8rem; margin-bottom: .5rem; }
+.pedido ul { margin: 0; padding-left: 1.1rem; color: #cbd5e1; font-size: .85rem; }
+.panel-vacio { text-align: center; color: #94a3b8; padding: 2rem 0; }
+
+/* ---------- Toast ---------- */
+.toast { position: fixed; bottom: 1.5rem; left: 50%; transform: translate(-50%, 20px); background: #334155; color: #fff; padding: .8rem 1.2rem; border-radius: 8px; opacity: 0; pointer-events: none; transition: all .25s; z-index: 50; max-width: 90%; text-align: center; }
+.toast.visible { opacity: 1; transform: translate(-50%, 0); }
+.toast.ok { background: #166534; }
+.toast.error { background: #991b1b; }
+
+@media (max-width: 640px) {
+  .saludo { display: none; }
+  .hero h1 { font-size: 1.5rem; }
+}

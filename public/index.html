@@ -4,42 +4,132 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TechStore - Tienda de Computadoras</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; background-color: #0f172a; color: #f8fafc; }
-    header { background: #1e293b; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; }
-    h1 { color: #38bdf8; margin: 0; font-size: 1.5rem; }
-    .contenedor { display: flex; padding: 2rem; gap: 2rem; }
-    .catalogo { flex: 2; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; }
-    .tarjeta-producto { background: #1e293b; border-radius: 8px; padding: 1rem; text-align: center; border: 1px solid #334155; }
-    .tarjeta-producto img { width: 100%; height: 140px; object-fit: cover; border-radius: 4px; }
-    .carrito-seccion { flex: 1; background: #1e293b; padding: 1.5rem; border-radius: 8px; height: fit-content; border: 1px solid #334155; }
-    button { background-color: #0ea5e9; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-weight: bold; margin-top: 0.5rem; width: 100%; }
-    button:hover { background-color: #0284c7; }
-    input { width: 100%; padding: 0.5rem; margin-bottom: 0.5rem; background: #0f172a; border: 1px solid #475569; color: white; border-radius: 4px; box-sizing: border-box; }
-    ul { padding-left: 0; list-style: none; }
-    li { display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.9rem; border-bottom: 1px solid #334155; padding-bottom: 0.3rem; }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>TechStore 💻</h1>
-    <span id="contadorCarrito">🛒 Carrito: 0 items</span>
-  </header>
-  <div class="contenedor">
-    <div class="catalogo" id="catalogoProductos"></div>
-    <div class="carrito-seccion">
-      <h2>Tu Carrito</h2>
-      <ul id="listaCarrito"></ul>
-      <h3>Total: $<span id="totalCarrito">0.00</span></h3>
-      <div style="margin-top: 1rem;">
-        <input type="text" id="nombreCliente" placeholder="Tu Nombre" required>
-        <input type="email" id="emailCliente" placeholder="Tu Correo" required>
-        <button id="botonComprar">Finalizar Compra y Registrar</button>
+
+  <!-- ============ VISTA: LOGIN / REGISTRO ============ -->
+  <main id="vistaAuth" class="vista-auth oculto">
+    <div class="tarjeta">
+      <h2>🖥️ TechStore</h2>
+      <p class="subtitulo">Laptops, GPUs, procesadores y más</p>
+
+      <div class="pestanas">
+        <button type="button" id="tabLogin" class="activa">Iniciar sesión</button>
+        <button type="button" id="tabRegistro">Registrarse</button>
       </div>
-      <p id="mensajeEstado" style="text-align: center; margin-top: 1rem;"></p>
+
+      <form id="formularioLogin">
+        <div class="campo">
+          <label for="loginEmail">Correo Electrónico</label>
+          <input type="email" id="loginEmail" autocomplete="email" required>
+        </div>
+        <div class="campo">
+          <label for="loginPassword">Contraseña</label>
+          <input type="password" id="loginPassword" autocomplete="current-password" required>
+        </div>
+        <button type="submit" class="btn-primario">Entrar a la tienda</button>
+      </form>
+
+      <form id="formularioRegistro" class="oculto">
+        <div class="campo">
+          <label for="nombre">Nombre Completo</label>
+          <input type="text" id="nombre" autocomplete="name" maxlength="100" required>
+        </div>
+        <div class="campo">
+          <label for="email">Correo Electrónico</label>
+          <input type="email" id="email" autocomplete="email" maxlength="100" required>
+        </div>
+        <div class="campo">
+          <label for="password">Contraseña (mínimo 6 caracteres)</label>
+          <input type="password" id="password" autocomplete="new-password" minlength="6" maxlength="72" required>
+        </div>
+        <div class="campo">
+          <label for="interes">Producto de Interés</label>
+          <select id="interes" required>
+            <option value="">Seleccione una opción</option>
+            <option value="Laptops Gamer">Laptops Gamer</option>
+            <option value="Tarjetas Gráficas">Tarjetas Gráficas</option>
+            <option value="Procesadores">Procesadores</option>
+            <option value="Monitores">Monitores</option>
+            <option value="Almacenamiento">Almacenamiento</option>
+            <option value="Accesorios">Accesorios</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-primario">Crear cuenta</button>
+      </form>
+
+      <div id="mensaje" role="alert"></div>
     </div>
+  </main>
+
+  <!-- ============ VISTA: TIENDA ============ -->
+  <div id="vistaTienda" class="oculto">
+    <header class="barra">
+      <div class="barra-contenido">
+        <div class="logo">🖥️ TechStore</div>
+        <input type="search" id="buscador" class="buscador" placeholder="Buscar productos..." maxlength="100">
+        <div class="acciones">
+          <span id="saludo" class="saludo"></span>
+          <button type="button" id="btnPedidos" class="btn-secundario">📦 Mis pedidos</button>
+          <button type="button" id="btnCarrito" class="btn-secundario">🛒 Carrito <span id="contadorCarrito" class="contador">0</span></button>
+          <button type="button" id="btnSalir" class="btn-salir">Salir</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <h1>Arma la PC de tus sueños</h1>
+      <p id="textoInteres">Los mejores componentes y laptops gamer al mejor precio.</p>
+    </section>
+
+    <section class="filtros">
+      <div id="chipsCategorias" class="chips"></div>
+      <select id="ordenar" aria-label="Ordenar productos">
+        <option value="relevancia">Destacados</option>
+        <option value="precio_asc">Precio: menor a mayor</option>
+        <option value="precio_desc">Precio: mayor a menor</option>
+        <option value="nombre">Nombre (A-Z)</option>
+      </select>
+    </section>
+
+    <main class="contenedor">
+      <div id="gridProductos" class="grid"></div>
+      <p id="estadoVacio" class="vacio oculto">No encontramos productos con esos filtros 😕</p>
+    </main>
+
+    <footer class="pie">© TechStore — Tienda de computadoras</footer>
   </div>
-  <script src="TiendaCliente.js"></script>
+
+  <!-- ============ CARRITO (panel lateral) ============ -->
+  <div id="fondo" class="fondo"></div>
+  <aside id="panelCarrito" class="panel" aria-label="Carrito de compras">
+    <div class="panel-cabecera">
+      <h3>🛒 Tu carrito</h3>
+      <button type="button" class="cerrar" data-cerrar aria-label="Cerrar">✕</button>
+    </div>
+    <div id="itemsCarrito" class="panel-cuerpo"></div>
+    <div class="panel-pie">
+      <div class="total"><span>Total</span><strong id="totalCarrito">S/ 0.00</strong></div>
+      <button type="button" id="btnComprar" class="btn-primario">Finalizar compra</button>
+      <button type="button" id="btnVaciar" class="btn-enlace">Vaciar carrito</button>
+    </div>
+  </aside>
+
+  <!-- ============ MIS PEDIDOS (panel lateral) ============ -->
+  <aside id="panelPedidos" class="panel" aria-label="Mis pedidos">
+    <div class="panel-cabecera">
+      <h3>📦 Mis pedidos</h3>
+      <button type="button" class="cerrar" data-cerrar aria-label="Cerrar">✕</button>
+    </div>
+    <div id="listaPedidos" class="panel-cuerpo"></div>
+  </aside>
+
+  <div id="toast" class="toast" role="status"></div>
+
+  <script src="Api.js"></script>
+  <script src="ClienteRegistro.js"></script>
+  <script src="Tienda.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
