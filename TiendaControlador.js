@@ -21,7 +21,7 @@ class TiendaControlador {
 
     try {
       const pedido = await this.tiendaModel.crearPedido(cliente, email, total);
-      return res.status(201).json({ mensaje: '¡Compra realizada con éxito!', pedido });
+      return res.status(201).json({ mensaje: '¡Compra y registro realizados con éxito!', pedido });
     } catch (error) {
       return res.status(500).json({ error: 'Error al procesar el pedido.' });
     }
